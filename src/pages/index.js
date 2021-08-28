@@ -1,17 +1,18 @@
-import * as React from "react";
+import * as React from 'react';
 
 // components
+import BackgroundDiv from '../components/backgroundDiv';
 import Button from '../components/button';
-import TextInput from "../components/textInput";
+import TextInput from '../components/textInput';
 
 const IndexPage = () => {
   return (
-    <div>
+    <BackgroundDiv>
       <div>Hi</div>
       <Button>Press</Button>
       <TextInput />
-    </div>
+    </BackgroundDiv>
   )
-}
+};
 
-export default IndexPage
+export default IndexPage;
