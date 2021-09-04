@@ -6,6 +6,12 @@ module.exports = {
   plugins: ["gatsby-plugin-emotion", "gatsby-plugin-gatsby-cloud", {
     resolve: "gatsby-plugin-firebase",
     options: {
+      features: {
+        auth: true,
+        database: true,
+        firestore: true,
+        storage: true,
+      },
       credentials: {
         apiKey: "AIzaSyAJ-3W2RMpne32nRTGMz8axxOmMiiig9ho",
         authDomain: "igs-test-93ab5.firebaseapp.com",
