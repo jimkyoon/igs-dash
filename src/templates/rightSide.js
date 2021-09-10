@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-const Right = ({page}) => {
-  // firebase to grab collection for each page
+const RightSide = ({page, postId}) => {
 
   // top section for collections
     // each card is a button to fill form below for updating or deleting
@@ -10,4 +9,4 @@ const Right = ({page}) => {
     // if card is selected from above, then it populates to be updated/deleted
 };
 
-export default Right;
+export default RightSide;

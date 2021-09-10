@@ -10,10 +10,8 @@ import MainSection from '../templates/mainSection';
 import AlertBar from '../components/alertBar';
 
 const IndexPage = () => {
-  // determine what shows up on right panel
-  const [page, setPage] = React.useState('');
   // determine if request is in process
-  const [isSending, setIsSending] = React.useState(false);
+  // const [isSending, setIsSending] = React.useState(false);
   // login state to determine which page shows
   // const [
   //   signInWithEmailAndPassword,
@@ -21,18 +19,28 @@ const IndexPage = () => {
   //   loading,
   //   error,
   // ] = useSignInWithEmailAndPassword(firebase.auth.Auth);
+
   // any errors or success messages
   const [alert, setAlert] = React.useState({
     isError: true,
     message: 'testing', 
   });
 
+  React.useEffect(() => {
+    // after component mounts, if message is there, after 5 seconds, disppears
+    const timer = setTimeout(() => {
+      setAlert({...alert, message: ''})
+    }, 5000)
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  const user = true;
+
   return (
     <BackgroundDiv>
-      <div>Hi</div>
-      {/* { user ? <div>Hi</div> : <Login />} */}
-      <Login />
-      <MainSection page={page} setPage={setPage} />
+      { user ? <MainSection setAlert={setAlert} /> : <Login />}
       { alert.message.length !== 0 ? <AlertBar isError={alert.isError} children={alert.message} /> : null}
     </BackgroundDiv>
   )
