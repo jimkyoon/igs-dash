@@ -1,47 +1,48 @@
-import * as React from 'react';
+import * as React from "react";
 
-import TopBar from './topBar';
-import LeftSide from './leftSide';
-import RightSide from './rightSide';
+import TopBar from "./topBar";
+import LeftSide from "./leftSide";
+import RightSide from "./rightSide";
 
-const testList = [
-  {key: 'hi123', message: 'hello'},
-  {key: 'bye123', message: 'hello'},
-];
+import { getAllDocs } from "../utils/posts";
 
-const MainSection = ({setAlert}) => {
-  const [page, setPage] = React.useState('');
-  const [list, setList] = React.useState(testList);
+const pages = ["articles", "greetings", "sounds", "stories"];
+
+const MainSection = ({ setAlert }) => {
+  const [page, setPage] = React.useState(pages[0]);
+  const [list, setList] = React.useState([]);
   // determine which form to show on RightSide
-  const [postId, setPostId] = React.useState('');
+  const [postId, setPostId] = React.useState("");
 
-  const pages = ['articles', 'greetings', 'sounds', 'stories',];
+  React.useEffect(() => {
+    async function getDocs() {
+      const docList = await getAllDocs(page);
+      // change list to match page, also reset what shows on right form
+      setList(docList);
+      setPostId("");
+    }
+    getDocs();
+  }, [page]);
 
   const mainSectionStyling = {
-    display: 'flex',
-    width: '100%',
+    display: "flex",
+    width: "100%",
   };
+
+  const findPostData = list[list.findIndex((i) => i.id === postId)];
+  const postRightSideData = findPostData ? findPostData : null;
+
+  const arrayOfList = Array.isArray(list) ? list : [];
 
   return (
     <div>
-      <TopBar
-        page={page}
-        pages={pages}
-        setPage={setPage}
-      />
+      <TopBar page={page} pages={pages} setPage={setPage} />
       <div style={mainSectionStyling}>
-        <LeftSide
-          list={list}
-          postId={postId}
-          setPostId={setPostId}
-        />
-        {/* <RightSide
-          page={page}
-          postId={postId}
-        /> */}
+        <LeftSide list={arrayOfList} postId={postId} setPostId={setPostId} />
+        <RightSide page={page} post={postRightSideData} setPostId={setPostId} />
       </div>
     </div>
   );
-}
+};
 
 export default MainSection;

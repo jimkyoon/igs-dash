@@ -1,28 +1,27 @@
-import * as React from 'react';
+import * as React from "react";
 
 // components
-import TextInput from '../components/textInput';
-import ButtonFilled from '../components/buttonFilled';
+import TextInput from "../components/textInput";
+import ButtonFilled from "../components/buttonFilled";
 
-const SignInBlock = props => {
-  const { email, password, setEmail, setPassword } = props;
+const SignInBlock = ({ email, password, setEmail, setPassword }) => {
   return (
     <div>
-      <TextInput 
-        type="email" 
-        placeholder="Email" 
-        value={email} 
-        onChange={e => setEmail(e.target.value)}
+      <TextInput
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+        type="email"
+        value={email}
       />
-      <TextInput 
-        type="password" 
-        placeholder="Password" 
-        value={password} 
-        onChange={e => setPassword(e.target.value)}
+      <TextInput
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+        type="password"
+        value={password}
       />
       <ButtonFilled>Sign In</ButtonFilled>
     </div>
-  )
+  );
 };
 
 export default SignInBlock;
