@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
 const getAllDocs = async (page) => {
@@ -16,8 +16,18 @@ const getAllDocs = async (page) => {
 };
 
 const submitNewDoc = async (page, formState) => {
+  console.log("now submitting form");
   const newDoc = await addDoc(collection(db, page), formState);
-  console.log('new doc', newDoc);
+  console.log("new doc", newDoc);
 };
 
-export { getAllDocs, submitNewDoc };
+const updatePost = async (page, postId, formState) => {
+  console.log("now updating doc");
+  const edittedFormState = { ...formState };
+  delete edittedFormState.id;
+  const currentDoc = doc(db, page, postId);
+  await updateDoc(currentDoc, edittedFormState);
+  console.log("finishing up update");
+};
+
+export { getAllDocs, submitNewDoc, updatePost };

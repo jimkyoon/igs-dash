@@ -39,7 +39,12 @@ const MainSection = ({ setAlert }) => {
       <TopBar page={page} pages={pages} setPage={setPage} />
       <div style={mainSectionStyling}>
         <LeftSide list={arrayOfList} postId={postId} setPostId={setPostId} />
-        <RightSide page={page} post={postRightSideData} setPostId={setPostId} />
+        <RightSide
+          page={page}
+          post={postRightSideData}
+          setAlert={setAlert}
+          setPostId={setPostId}
+        />
       </div>
     </div>
   );
